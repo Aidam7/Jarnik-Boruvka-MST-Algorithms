@@ -1,0 +1,188 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage[english,czech]{babel}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\author{Tomáš Diblík, Vilém Cerman, Adam Pečenka \\ 3.A}
+\title{Jarníkův algoritmus a Borůvkův algoritmus}
+\date{\selectlanguage{czech}\today}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{code_style}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=code_style}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+\pagebreak
+
+% TODO: 
+% - Seznámení Jar (teorie, neobsahovat implementaci)
+% - Seznámení Bor (teorie, neobsahovat implementaci)
+% - Historie Jar (jak byl vymýšlenej a atd
+% - Historie Bor (jak byl vymýšlenej a atd
+% - Využití (obecný, jelikož řeší stejnej problém)
+% - Rozdíl mezi ("Jarníkův a Borůvkův algoritmus" -- Primův) A (Jarníkův algortimus ; Borůvkův algoritmus)
+% - Implementace (pro každej tyhle body)
+%   - v pseudo kódu
+%   - v C# (aby všichni hned nestratili pozornost)
+%   - v C
+
+\tableofcontents
+\thispagestyle{empty}
+\pagebreak
+
+\setcounter{page}{1}
+\pagenumbering{Roman}
+\section{Sdílené funkce}
+Abychom zbytečně neopakovali nějaké kusy kódu, tak
+zde vypíši funkce a globální promněné, které většina sortů používá.
+Tyto funkce poté již nebudu v implementaci uvádět.
+Toto rozhodnotí jsem učinil z důvodu délky práce.
+
+% Example code
+\subsection{Vždy využité importy}
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+#include <stdlib.h>
+\end{lstlisting}
+
+% Example code
+\subsection{Globální definice (konstanty)}
+\begin{lstlisting}[language=C]
+#define NUMBER_OF_VALUES 20
+#define RANDOM_RANGE_MIN 1
+#define RANDOM_RANGE_MAX 40
+\end{lstlisting}
+
+% Example code
+\subsection{Funkce print\_array}
+\begin{lstlisting}[language=C]
+// Function signature
+void print_array(int *values, int arr_size);
+
+// Function implementation
+void print_array(int *values, int arr_size) {
+  for (int i = 0; i < arr_size; i++) {
+    printf("%d", values[i]);
+    if (i != arr_size - 1) {
+      printf(", ");
+    }
+  }
+  printf("\n");
+}
+\end{lstlisting}
+
+\subsection{Funkce get\_random\_values}
+\begin{lstlisting}[language=C]
+// Function signature
+int* get_random_values();
+
+// Function implementation
+int* get_random_values() {
+  srand(time(NULL));
+  int *random_values = (int *)malloc(sizeof(int) * NUMBER_OF_VALUES);
+  for (int i = 0; i < NUMBER_OF_VALUES; i++) {
+    random_values[i] =
+        rand() % ((RANDOM_RANGE_MAX + 1) - RANDOM_RANGE_MIN) + RANDOM_RANGE_MIN;
+  }
+  return random_values;
+}
+\end{lstlisting}
+
+\pagebreak
+
+% Example section and subsection
+\section{Selection sort}
+\subsection{Základní informace}
+Selection sort je jeden z nejjednoduších a nejznámější třídících algoritmů.
+Dnes již skoro nepoužíván, vzhledem k existenci optimálnější algoritmů,
+avšak pořád učen, vzhledem k své jednoduchosti.
+Historie selection sortu není dobře zdokumentována, tudíž je původ algoritmu nejasný.
+Selection sort funguje tak, že jdeme prvek po prvku, aktuální prvek poté porovnáme
+s zbytkem prvků a zjistíme která hodnota na jakém indexu je nejmenší.
+Tuto nejmenší hodnotu poté prohodíme s aktuálním prvkem.
+
+% Example algorithm complexity
+\subsection{Komplexity}
+\medbreak
+\textbf{Nejhorší možná časová komplexita}: $O(n^2)$
+\medbreak\noindent
+\textbf{Průměrná časová komplexita}: $O(n^2)$
+\medbreak\noindent
+\textbf{Nejlepší možná časová komplexita}: $O(n^2)$
+\medbreak\noindent
+\textbf{Prostorová komplexita}: $O(1)$
+\medbreak\noindent
+\textbf{Stabilita}: Nestabilní
+\medbreak
+
+% Example section
+\subsection{Implementace}
+Jedná se o (skoro) typickou implementaci selection sortu, avšak tato implementace 
+obsahuje 2 optimalizace. První je, že implementace neprochází poslední element, 
+druhou je, že pokud se nejmenší index rovná aktuálnímu indexu tak 
+neprovádí prohození hodnot.
+
+% Example code
+\begin{lstlisting}[language=C]
+void selection_sort(int *values, int arr_size);
+
+int main() {
+  int *random_values = get_random_values();
+
+  print_array(random_values, NUMBER_OF_VALUES);
+  selection_sort(random_values, NUMBER_OF_VALUES);
+  print_array(random_values, NUMBER_OF_VALUES);
+
+  free(random_values);
+  return 0;
+}
+
+void selection_sort(int *values, int arr_size) {
+  int smallest_index;
+  for (int i = 0; i < arr_size - 1; i++) {
+
+    smallest_index = i;
+
+    // if the current element is smaller than the current smallest, update smallest_index
+    for (int j = i + 1; j < arr_size; j++) {
+      if (values[j] < values[smallest_index]) {
+        smallest_index = j;
+      }
+    }
+
+    // if smallest_index has changed, swap the elements
+    if (smallest_index != i) {
+      int temp = values[smallest_index];
+      values[smallest_index] = values[i];
+      values[i] = temp;
+    }
+  }
+}
+\end{lstlisting}
+
+\end{document}
