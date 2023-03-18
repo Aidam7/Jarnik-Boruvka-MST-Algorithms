@@ -2,8 +2,10 @@
 
 \usepackage[a4paper, total={6in, 8in}]{geometry}
 \usepackage[english,czech]{babel}
-\usepackage{listings}
 \usepackage{xcolor}
+\usepackage{listings}
+\usepackage{svg}
+\usepackage{graphicx}
 
 \author{Tomáš Diblík, Vilém Cerman, Adam Pečenka \\ 3.A}
 \title{Jarníkův algoritmus a Borůvkův algoritmus}
@@ -29,7 +31,26 @@
     showspaces=false,                
     showstringspaces=false,
     showtabs=false,                  
-    tabsize=2
+    tabsize=2,
+    inputencoding=utf8,
+    extendedchars=true,
+    escapeinside=||,
+    literate=
+        {á}{{\'a}}1
+        {č}{{\v{c}}}1
+        {ď}{{\v{d}}}1
+        {é}{{\'e}}1
+        {ě}{{\v{e}}}1
+        {í}{{\'i}}1
+        {ň}{{\v{n}}}1
+        {ó}{{\'o}}1
+        {ř}{{\v{r}}}1
+        {š}{{\v{s}}}1
+        {ť}{{\v{t}}}1
+        {ú}{{\'u}}1
+        {ů}{{\r{u}}}1
+        {ý}{{\'y}}1
+        {ž}{{\v{z}}}1
 }
 \lstset{style=code_style}
 
@@ -39,150 +60,276 @@
 \thispagestyle{empty}
 \pagebreak
 
-% TODO: 
-% - Seznámení Jar (teorie, neobsahovat implementaci)
-% - Seznámení Bor (teorie, neobsahovat implementaci)
-% - Historie Jar (jak byl vymýšlenej a atd
-% - Historie Bor (jak byl vymýšlenej a atd
-% - Využití (obecný, jelikož řeší stejnej problém)
-% - Rozdíl mezi ("Jarníkův a Borůvkův algoritmus" -- Primův) A (Jarníkův algortimus ; Borůvkův algoritmus)
-% - Implementace (pro každej tyhle body)
-%   - v pseudo kódu ---- vysvětlení
-%   - v C# (aby všichni hned nestratili pozornost)
-%   - v C
-
 \tableofcontents
 \thispagestyle{empty}
 \pagebreak
 
 \setcounter{page}{1}
 \pagenumbering{Roman}
-\section{Sdílené funkce}
-Abychom zbytečně neopakovali nějaké kusy kódu, tak
-zde vypíši funkce a globální promněné, které většina sortů používá.
-Tyto funkce poté již nebudu v implementaci uvádět.
-Toto rozhodnotí jsem učinil z důvodu délky práce.
+\section{Časové komplexity}
 
-% Example code
-\subsection{Vždy využité importy}
-\begin{lstlisting}[language=C]
-#include <stdio.h>
-#include <stdlib.h>
-\end{lstlisting}
+\subsection{Jarníkův algoritmus}
 
-% Example code
-\subsection{Globální definice (konstanty)}
-\begin{lstlisting}[language=C]
-#define NUMBER_OF_VALUES 20
-#define RANDOM_RANGE_MIN 1
-#define RANDOM_RANGE_MAX 40
-\end{lstlisting}
-
-% Example code
-\subsection{Funkce print\_array}
-\begin{lstlisting}[language=C]
-// Function signature
-void print_array(int *values, int arr_size);
-
-// Function implementation
-void print_array(int *values, int arr_size) {
-  for (int i = 0; i < arr_size; i++) {
-    printf("%d", values[i]);
-    if (i != arr_size - 1) {
-      printf(", ");
-    }
-  }
-  printf("\n");
-}
-\end{lstlisting}
-
-\subsection{Funkce get\_random\_values}
-\begin{lstlisting}[language=C]
-// Function signature
-int* get_random_values();
-
-// Function implementation
-int* get_random_values() {
-  srand(time(NULL));
-  int *random_values = (int *)malloc(sizeof(int) * NUMBER_OF_VALUES);
-  for (int i = 0; i < NUMBER_OF_VALUES; i++) {
-    random_values[i] =
-        rand() % ((RANDOM_RANGE_MAX + 1) - RANDOM_RANGE_MIN) + RANDOM_RANGE_MIN;
-  }
-  return random_values;
-}
-\end{lstlisting}
-
-\pagebreak
-
-% Example section and subsection
-\section{Selection sort}
-\subsection{Základní informace}
-Selection sort je jeden z nejjednoduších a nejznámější třídících algoritmů.
-Dnes již skoro nepoužíván, vzhledem k existenci optimálnější algoritmů,
-avšak pořád učen, vzhledem k své jednoduchosti.
-Historie selection sortu není dobře zdokumentována, tudíž je původ algoritmu nejasný.
-Selection sort funguje tak, že jdeme prvek po prvku, aktuální prvek poté porovnáme
-s zbytkem prvků a zjistíme která hodnota na jakém indexu je nejmenší.
-Tuto nejmenší hodnotu poté prohodíme s aktuálním prvkem.
-
-% Example algorithm complexity
-\subsection{Komplexity}
 \medbreak
-\textbf{Nejhorší možná časová komplexita}: $O(n^2)$
+\textbf{Nejhorší možná časová komplexita}: TODO
 \medbreak\noindent
-\textbf{Průměrná časová komplexita}: $O(n^2)$
+\textbf{Průměrná časová komplexita}: TODO
 \medbreak\noindent
-\textbf{Nejlepší možná časová komplexita}: $O(n^2)$
+\textbf{Nejlepší možná časová komplexita}: TODO
 \medbreak\noindent
-\textbf{Prostorová komplexita}: $O(1)$
+\textbf{Prostorová komplexita}: TODO
+\medbreak\noindent
+\textbf{Stabilita}: TODO
+\medbreak
+
+\subsection{Borůvkův algortimus}
+
+\medbreak
+\textbf{Nejhorší možná časová komplexita}: $O(E * log(N))$
+\medbreak\noindent
+\textbf{Průměrná časová komplexita}: $O(E * log(N))$
+\medbreak\noindent
+\textbf{Nejlepší možná časová komplexita}: $O(E * log(N))$
+\medbreak\noindent
+\textbf{Prostorová komplexita}: $O(E + N)$
 \medbreak\noindent
 \textbf{Stabilita}: Nestabilní
 \medbreak
 
+\pagebreak
+
+
+\section{Historie}
+
+\subsection{Jarníkův algoritmus}
+TODO
+
+\subsection{Borůvkův algoritmus}
+Borůvkův algoritmus, také známý jako Sollinův algoritmus, je grafový algoritmus pojmenovaný po 
+českém matematikovi Otakaru Borůvkovi. Algoritmus poprvé popsal Borůvka v roce 1926 a byl 
+navržen k nalezení minimální kostry grafu. 
+V původní podobě byl Borůvkův algoritmus navržen k práci s grafy, které nemusí být nutně spojené. 
+Nicméně v moderních implementacích je algoritmus typicky upraven pro práci pouze s 
+propojenými grafy, což zjednodušuje implementaci a vede ke stejnému výsledku.
+
+\subsection{Rozdíl mezi Primovím algoritmem a Jarníkovím algoritmem}
+Jarníkův algortimus je starší verze Primova algortimu. Vyvinul jí český matematik Vojtěch Jarník v roce 1930,
+avšak poprvé byla publikována upravená verze algoritmu Robertem C. Primem, který algortimus oběvil a upravil v roce
+1957. Aby toho nebylo málo, tak byl tento algortimus poté vylepšen v roce 1959 Edsgerem Dijkstrou, tudíž můžeme různé
+verze algoritmu najít pod jmény: "Jarníkův algoritmus", "Primův algoritmus", "DJP algortimus".
+
+\pagebreak
+
+
+\section{Využití}
+Jarníkův i Borůvkův algoritmus jsou staré algoritmy, které se již často nevyužívají, vzhledem k pokroku 
+v oblasti grafové teorie. Oba algoritmy byly vytvářeny v 40 letech 90. století českými matematiky.
+Oba algortimy řeší problém nalezení minimální kostry grafu. Jedná se o problém, kdy chceme v nedirektovaném
+vyváženém grafu najít nejmenší možnou kostru. To znamená že máme graf, ve kterém jsou náhodně propojené prvky.
+Každý propoj má nějakou hodnotu. Naším cílem je najít stromovou strukturu, díky které se dostateneme ke každému "nodu"
+grafu za pomoci využití co nejmenších hodnot na spojích. Jakmile máme takovouto stromovou strukturu, můžeme nad ní efektivně 
+vyhledávat data, či ji jakkoliv procházet. Jako příklad bychom mohly využít routování v síti, kdy si router najde
+všechny zařízení na síti pomocí ARP protocolu, zjistí response time pro jednotlivé zařízení za pomocí pingu, 
+sestaví nedirektovaný vyvážený graf, poté využije nějaký algoritmus na najdutí minimální kostry grafy a 
+dle toho poté posílá packety. S největší pravděpodobností v dnešní době daný router nebude používat tento starý 
+algortimus, ale teoreticky bychom ho mohly najít na velice starých modelech. Algoritmus je na úpravu dat
+do podoby, která se poté hodí a zrychluje jiné algoritmy.
+
+\pagebreak
+
 % Example section
-\subsection{Implementace}
-Jedná se o (skoro) typickou implementaci selection sortu, avšak tato implementace 
-obsahuje 2 optimalizace. První je, že implementace neprochází poslední element, 
-druhou je, že pokud se nejmenší index rovná aktuálnímu indexu tak 
-neprovádí prohození hodnot.
+\section{Implementace}
 
-% Example code
-\begin{lstlisting}[language=C]
-void selection_sort(int *values, int arr_size);
+\subsection{Jarníkův algoritmus}
+TODO vysvětlení
 
-int main() {
-  int *random_values = get_random_values();
+\subsubsection{Psuedo-kód}
+TODO
 
-  print_array(random_values, NUMBER_OF_VALUES);
-  selection_sort(random_values, NUMBER_OF_VALUES);
-  print_array(random_values, NUMBER_OF_VALUES);
+\subsubsection{C\#}
+TODO
 
-  free(random_values);
-  return 0;
-}
+\pagebreak
+\subsection{Borůvkův algoritmus}
+Jedná se o standardní implementaci Borůvkova algortimu, která byla vytvořena dle pseudo-kód nalezeného níže.
+Algortimus je psaný (bohužel) v C\#, jelikož jsem po 6 hodinách C již neměl síly a segmentation fault jsem viděl
+při každém mrknutí :D.
+Algoritmus funguje tím, že rozdělí graf na několik 
+spojených komponent a opakovaně přidává hranu s minimální váhou, která spojuje dvě různé komponenty. 
+Tento proces pokračuje, dokud není graf úplně propojen, čímž vznikne minimální koster.
 
-void selection_sort(int *values, int arr_size) {
-  int smallest_index;
-  for (int i = 0; i < arr_size - 1; i++) {
+\subsubsection{Psuedo-kód}
+\begin{lstlisting}
+// Source: https://cs.wikipedia.org/wiki/Bor%C5%AFvk%C5%AFv_algoritmus#Implementace_v_pseudok%C3%B3du
 
-    smallest_index = i;
+algoritmus Borůvka:
+    vstup: Graf G jehož hrany mají různé ohodnocení.
+    výstup: Strom F je minimální kostra grafu G.
 
-    // if the current element is smaller than the current smallest, update smallest_index
-    for (int j = i + 1; j < arr_size; j++) {
-      if (values[j] < values[smallest_index]) {
-        smallest_index = j;
-      }
+    Inicializuj les F jako množinu stromů s jedním vrcholem pro každý vrchol v grafu.
+
+    dokud má F více než jednu komponentu:
+        Najdi komponenty souvislosti v F a označ každý vrchol G jeho komponentou
+        Inicializuj nejlevnější hranu pro každou komponentu na speciální hranu s cenou =>
+        pro každou hranu uv v G:
+            pokud mají u a v různé označení komponenty:
+                pokud je uv levnější než nejlevnější hrana pro komponentu u:
+                    Nastav uv jako nejlevnější hranu pro komponentu u
+                pokud uv je levnější než nejlevnější hrana pro komponentu v:
+                    Nastav uv jako nejlevnější hranu pro komponentu v
+        pro každou komponentu:
+            Přidej její nejlevnější hranu do F
+\end{lstlisting}
+
+\subsubsection{C\#}
+
+\medbreak\noindent
+Edge.cs
+\begin{lstlisting}[language=csh]
+public class Edge
+{
+    public int From { get; set; }
+    public int To { get; set; }
+    public int Weight { get; set; }
+
+    public Edge(int from, int to, int weight)
+    {
+        From = from;
+        To = to;
+        Weight = weight;
     }
-
-    // if smallest_index has changed, swap the elements
-    if (smallest_index != i) {
-      int temp = values[smallest_index];
-      values[smallest_index] = values[i];
-      values[i] = temp;
-    }
-  }
 }
 \end{lstlisting}
+
+\medbreak\noindent
+MSTGraph.cs
+\begin{lstlisting}[language=csh]
+public class MSTGraph
+{
+    private readonly int number_of_nodes;
+    private readonly List<Edge> edges = new List<Edge>();
+
+    public MSTGraph(int _number_of_nodes)
+    {
+        number_of_nodes = _number_of_nodes;
+    }
+
+    public void AddEdge(int from, int to, int weight) => edges.Add(new Edge(from, to, weight));
+
+    public List<Edge> BoruvkaMST()
+    {
+        List<Edge> MST = new List<Edge>();
+
+        // Create a parent array to keep track of components
+        int[] parent = new int[number_of_nodes];
+        for (int i = 0; i < number_of_nodes; i++) {
+            parent[i] = i;
+        }
+
+        // Loop until there is only one component left
+        while (MST.Count < number_of_nodes - 1) {
+            // Create an array to keep track of the minimum edge for each component
+            int[] minEdge = new int[number_of_nodes];
+            for (int i = 0; i < number_of_nodes; i++) {
+                minEdge[i] = -1;
+            }
+
+            // Find the minimum-weight edge for each component
+            for (int i = 0; i < edges.Count; i++) {
+                int current_from = edges[i].From;
+                int current_to = edges[i].To;
+                int current_weight = edges[i].Weight;
+
+                int set1 = find_parent_node(parent, current_from);
+                int set2 = find_parent_node(parent, current_to);
+
+                if (set1 == set2) {
+                    // The vertices are already in the same component
+                    continue;
+                }
+
+                if (minEdge[set1] == -1 || current_weight < edges[minEdge[set1]].Weight) {
+                    minEdge[set1] = i;
+                }
+
+                if (minEdge[set2] == -1 || current_weight < edges[minEdge[set2]].Weight) {
+                    minEdge[set2] = i;
+                }
+            }
+
+            // Add the minimum-weight edges to the MST
+            for (int i = 0; i < number_of_nodes; i++) {
+                if (minEdge[i] != -1) {
+                    int current_from = edges[minEdge[i]].From;
+                    int current_to = edges[minEdge[i]].To;
+                    int current_weight = edges[minEdge[i]].Weight;
+
+                    int set1 = find_parent_node(parent, current_from);
+                    int set2 = find_parent_node(parent, current_to);
+
+                    if (set1 != set2) {
+                        MST.Add(new Edge(current_from, current_to, current_weight));
+                        parent[set1] = set2;
+                    }
+                }
+            }
+        }
+
+        return MST;
+    }
+
+    // Find the parent of a node in the parent array
+    private int find_parent_node(int[] parent, int i) => parent[i] == i ? i : (parent[i] = find_parent_node(parent, parent[i]));
+}
+\end{lstlisting}
+
+\medbreak\noindent
+Příklad využití:
+\begin{lstlisting}[language=csh]
+internal class Program
+{
+    static void Main()
+    {
+        /*
+                0
+               / \
+              1 - 2
+             / \ / \
+            3   4 - 5
+             \ /
+              6
+        */
+        MSTGraph graph = new MSTGraph(7);
+
+        graph.AddEdge(0, 1, 4);
+        graph.AddEdge(0, 2, 3);
+
+        graph.AddEdge(1, 2, 5);
+        graph.AddEdge(1, 3, 2);
+
+        graph.AddEdge(2, 4, 8);
+        graph.AddEdge(2, 5, 1);
+
+        graph.AddEdge(3, 6, 8);
+
+        graph.AddEdge(4, 5, 6);
+        graph.AddEdge(4, 6, 2);
+
+        List<Edge> MinimumSpanningTree = graph.BoruvkaMST();
+
+        Console.WriteLine("Minimum spanning tree:");
+        foreach (Edge edge in MinimumSpanningTree)
+        {
+            Console.WriteLine($"{edge.From} - {edge.To} ({edge.Weight})");
+        }
+    }
+}
+\end{lstlisting}
+
+\subsubsection{Class diagram}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\textwidth]{class_diagram_boruvka_alg.png}
+\end{figure}
 
 \end{document}
