@@ -103,40 +103,21 @@
 \section{Historie}
 
 \subsection{Borůvkův algoritmus}
-Borůvkův algoritmus, také známý jako Sollinův algoritmus, je grafový algoritmus pojmenovaný po 
-českém matematikovi Otakaru Borůvkovi. Algoritmus poprvé popsal pan Borůvka v roce 1926 a byl 
-navržen k nalezení minimální kostry grafu. 
-V původní podobě byl Borůvkův algoritmus navržen k práci s grafy, které nemusí být nutně spojené. 
-Nicméně v moderních implementacích je algoritmus typicky upraven pro práci pouze s 
-propojenými grafy, což zjednodušuje implementaci a vede ke stejnému výsledku.
+Borůvkův algoritmus, také známý jako Sollinův algoritmus, je grafový algoritmus pojmenovaný po českém matematikovi Otakaru Borůvkovi. Algoritmus poprvé popsal pan Borůvka v roce 1926 a byl navržen k nalezení minimální kostry grafu. V původní podobě byl Borůvkův algoritmus navržen k práci s grafy, které nemusí být nutně spojené. Nicméně v moderních implementacích je algoritmus typicky upraven pro práci pouze s propojenými grafy, což zjednodušuje implementaci a vede ke stejnému výsledku.
 
 \subsection{Jarníkův algoritmus}
 Jarníkův algoritmus, je algoritmus navržený profesorem Vojtěchem Jarníkem, algoritmus poprvé veřejně popsal roku 1930 ve své práci, která nese stejné jméno jako práce pana Borůvky, "O jistém problému minimálním."
-\footnote{JARNÍK, Vojtěch. O jistém problému minimálním.: (Z dopisu panu O. Borůvkovi) [online]. BRNO, ČESKOSLOVENSKO., 1930 [cit. 2023-04-10]. Dostupné z: https://dml.cz/handle/10338.dmlcz/500726. Matematika. Práce moravské přírodovědecké společnosti 6.}Vzhledem k podtitulku "Z dopisu panu O. Borůvkovi" je práce psaná v první osobě a volnější formou.
-
+\footnote{JARNÍK, Vojtěch. O jistém problému minimálním.: (Z dopisu panu O. Borůvkovi) [online]. BRNO, ČESKOSLOVENSKO., 1930 [cit. 2023-04-10]. Dostupné z: https://dml.cz/handle/10338.dmlcz/500726. Matematika. Práce moravské přírodovědecké společnosti 6.} Vzhledem k podtitulku "Z dopisu panu O. Borůvkovi" je práce psaná v první osobě a volnější formou.
 \footnote{BLAŽKOVÁ, Martina. Vojťech Jarník: význanmná osobnost české matematiky [online]. Liberec, 2016 [cit. 2023-04-10]. Dostupné z: https://dspace.tul.cz/bitstream/handle/15240/60337/V_23216_Pb.pdf. Bakalářská práce. Technická univerzita v Liberci, Fakulta přírodovědně-humanitní a pedagogická. Vedoucí práce RNDr. Alena Kopáčková, Ph.D.}
 
 \subsection{Rozdíl mezi Primovým algoritmem a Jarníkovým algoritmem}
-Jarníkův algoritmus je starší verze Primova algoritmu. Vyvinul jí český matematik Vojtěch Jarník v roce 1930,
-avšak poprvé byla publikována upravená verze algoritmu Robertem C. Primem, který algoritmus objevil a upravil v roce
-1957. Aby toho nebylo málo, tak byl tento algoritmus poté vylepšen v roce 1959 Edsgerem Dijkstrou, tudíž můžeme různé
-verze algoritmu najít pod jmény: "Jarníkův algoritmus", "Primův algoritmus", "DJP algoritmus".
+Jarníkův algoritmus je starší verze Primova algoritmu. Vyvinul jí český matematik Vojtěch Jarník v roce 1930, avšak poprvé byla publikována upravená verze algoritmu Robertem C. Primem, který algoritmus objevil a upravil v roce 1957. Aby toho nebylo málo, tak byl tento algoritmus poté vylepšen v roce 1959 Edsgerem Dijkstrou, tudíž můžeme různé verze algoritmu najít pod jmény: "Jarníkův algoritmus", "Primův algoritmus", "DJP algoritmus".
 
 \pagebreak
 
 
 \section{Využití}
-Jarníkův i Borůvkův algoritmus jsou staré algoritmy, které se již často nevyužívají, vzhledem k pokroku 
-v oblasti grafové teorie. Oba algoritmy byly vytvářeny v 40 letech 90. století českými matematiky.
-Oba algoritmy řeší problém nalezení minimální kostry grafu. Jedná se o problém, kdy chceme v nedirektovaném
-vyváženém grafu najít nejmenší možnou kostru. To znamená že máme graf, ve kterém jsou náhodně propojené prvky.
-Každé propojení má nějakou hodnotu. Naším cílem je najít stromovou strukturu, díky které se dostaneme ke každému "nodu"
-grafu za pomoci využití co nejmenších hodnot na spojích. Jakmile máme takovouto stromovou strukturu, můžeme nad ní efektivně 
-vyhledávat data, či ji jakkoliv procházet. Jako příklad bychom mohli využít routování v síti, kdy si router najde
-všechny zařízení na síti pomocí ARP protokolu, zjistí response time pro jednotlivé zařízení za pomocí pingu, 
-sestaví nedirektovaný vyvážený graf, poté využije nějaký algoritmus na nalezení minimální kostry grafy a 
-dle toho poté posílá packety. S největší pravděpodobností v dnešní době daný router nebude používat tento starý 
-algoritmus, ale teoreticky bychom ho mohli najít na velice starých modelech. Algoritmus je určen pro úpravu dat do podoby, tedy minimální kostry, kterou pak můžeme použít pro zrychlení dalších algoritmů.
+Jarníkův i Borůvkův algoritmus jsou staré algoritmy, které se již často nevyužívají, vzhledem k pokroku v oblasti grafové teorie. Oba algoritmy byly vytvářeny v 40 letech 90. století českými matematiky. Oba algoritmy řeší problém nalezení minimální kostry grafu. Jedná se o problém, kdy chceme v nedirektovaném vyváženém grafu najít nejmenší možnou kostru. To znamená že máme graf, ve kterém jsou náhodně propojené prvky. Každé propojení má nějakou hodnotu. Naším cílem je najít stromovou strukturu, díky které se dostaneme ke každému "nodu" grafu za pomoci využití co nejmenších hodnot na spojích. Jakmile máme takovouto stromovou strukturu,můžeme nad ní efektivně vyhledávat data, či ji jakkoliv procházet. Jako příklad bychom mohli využít routování v síti, kdy si router najde všechny zařízení na síti pomocí ARP protokolu, zjistí response time pro jednotlivé zařízení za pomocí pingu, sestaví nedirektovaný vyvážený graf, poté využije nějaký algoritmus na nalezení minimální kostry grafy a dle toho poté posílá packety. S největší pravděpodobností v dnešní době daný router nebude používat tento starý algoritmus, ale teoreticky bychom ho mohli najít na velice starých modelech. Algoritmus je určen pro úpravu dat do podoby, tedy minimální kostry, kterou pak můžeme použít pro zrychlení dalších algoritmů.
 
 \pagebreak
 
@@ -145,9 +126,7 @@ algoritmus, ale teoreticky bychom ho mohli najít na velice starých modelech. A
 
 \subsection{Borůvkův algoritmus}
 Jedná se o standardní implementaci Borůvkova algoritmu, která byla vytvořena dle pseudo-kód nalezeného níže. Algoritmus je psaný v C\#.
-Algoritmus funguje tak, že rozdělí graf na několik 
-spojených komponent a opakovaně přidává hranu s minimální váhou, která spojuje dvě různé komponenty. 
-Tento proces pokračuje, dokud není graf úplně propojen, čímž vznikne minimální kostra.
+Algoritmus funguje tak, že rozdělí graf na několik spojených komponent a opakovaně přidává hranu s minimální váhou, která spojuje dvě různé komponenty. Tento proces pokračuje, dokud není graf úplně propojen, čímž vznikne minimální kostra.
 
 \subsubsection{Psuedo-kód}
 \begin{lstlisting}
