@@ -35,10 +35,21 @@
                                  d[node] = weight(u, node) //nastav nvou vzdalenost    
     
                 return predecessors //vrat pole predchudcu
-             */
-
-
-
+             */ 
+            /*
+             Ano, tohle jsem vygeneroval AIkem, jdu spát, ráno se na to kouknu
+            1.Let S be a set of visited nodes, initially empty
+            2.Let T be a set of edges in the minimum spanning tree, initially empty
+            3.Let Q be a priority queue of edges, sorted by weight, initially containing all edges
+            4.Add any node to S
+            5.While S does not include all nodes:
+            a.Select the edge e with the minimum weight from Q
+            b.If the nodes of e are not both in S:
+            i.Add e to T
+            ii.Add the node(s) of e not in S to S
+            iii.Remove all edges from Q that connect nodes in S
+            6.Return T
+            */
             List<Edge> MST = new List<Edge>();
 
             // Create a parent array to keep track of components
