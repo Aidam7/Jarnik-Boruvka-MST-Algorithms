@@ -9,8 +9,8 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage{url}
 
-\author{Tomáš Diblík, Vilém Cerman, Adam Pečenka \\ 3.A}
-\title{Jarníkův algoritmus a Borůvkův algoritmus}
+\author{Cerman Vilém, Diblík Tomáš, Pečenka Adam \\ 3.A \\\\ DELTA - Střední škola informatiky a ekonomie, s.r.o.}
+\title{Algoritmy profesorů Jarníka a Borůvky}
 \date{\selectlanguage{czech}\today}
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
@@ -67,7 +67,7 @@
 \pagebreak
 
 \setcounter{page}{1}
-\pagenumbering{Roman}
+\pagenumbering{arabic}
 \section{Časové komplexity}
 
 \subsection{Borůvkův algoritmus}
@@ -105,11 +105,13 @@
 
 \subsection{Borůvkův algoritmus}
 Borůvkův algoritmus, také známý jako Sollinův algoritmus, je grafový algoritmus pojmenovaný po českém matematikovi Otakaru Borůvkovi. Algoritmus poprvé popsal pan Borůvka v roce 1926 a byl navržen k nalezení minimální kostry grafu. V původní podobě byl Borůvkův algoritmus navržen k práci s grafy, které nemusí být nutně spojené. Nicméně v moderních implementacích je algoritmus typicky upraven pro práci pouze s propojenými grafy, což zjednodušuje implementaci a vede ke stejnému výsledku.
+\footnote{Borůvkův algoritmus. In: Wikipedia: the free encyclopedia [online]. San Francisco (CA): Wikimedia Foundation, 2001- [cit. 2023-04-12]. Dostupné z: \url{https://cs.wikipedia.org/wiki/Bor\%C5\%AFvk\%C5\%AFv_algoritmus}}
+\footnote{Borůvka's algorithm. In: Wikipedia: the free encyclopedia [online]. San Francisco (CA): Wikimedia Foundation, 2001- [cit. 2023-04-12]. Dostupné z: \url{https://en.wikipedia.org/wiki/Bor\%C5\%AFvka\%27s_algorithm}}
 
 \subsection{Jarníkův algoritmus}
 Jarníkův algoritmus, je algoritmus navržený profesorem Vojtěchem Jarníkem, algoritmus poprvé veřejně popsal roku 1930 ve své práci, která nese stejné jméno jako práce pana Borůvky, "O jistém problému minimálním."
 \footnote{JARNÍK, Vojtěch. O jistém problému minimálním.: (Z dopisu panu O. Borůvkovi) [online]. BRNO, ČESKOSLOVENSKO., 1930 [cit. 2023-04-10]. Dostupné z: \url{https://dml.cz/handle/10338.dmlcz/500726}. Matematika. Práce moravské přírodovědecké společnosti 6.} Vzhledem k podtitulku "Z dopisu panu O. Borůvkovi" je práce psaná v první osobě a volnější formou.
-\footnote{BLAŽKOVÁ, Martina. Vojťech Jarník: význanmná osobnost české matematiky [online]. Liberec, 2016 [cit. 2023-04-10]. Dostupné z: \url{https://dspace.tul.cz/bitstream/handle/15240/60337/V_23216_Pb.pdf}. Bakalářská práce. Technická univerzita v Liberci, Fakulta přírodovědně-humanitní a pedagogická. Vedoucí práce RNDr. Alena Kopáčková, Ph.D.}
+\footnote{BLAŽKOVÁ, Martina. Vojťech Jarník: význanmná osobnost české matematiky [online]. Liberec, 2016 [cit. 2023-04-10]. Dostupné z: \url{https://dspace.tul.cz/bitstream/handle/15240/60337/V_23216_Pb.pdf}. Bakalářská práce. Technická univerzita v Liberci, Fakulta přírodovědně-humanitní a pedagogická. Vedoucí práce RNDr. Alena Kopáčková, Ph.D.} Algoritmus se používá pro hledání minimální kostry grafu a je, dle vlastního popisu profesorem Jarníkem z jeho dopisu panu Borůvkovi, "lepší a jednodušší verzí" Borůvkova algoritmu.
 
 \subsection{Rozdíl mezi Primovým algoritmem a Jarníkovým algoritmem}
 Jarníkův algoritmus je starší verze Primova algoritmu. Vyvinul jí český matematik Vojtěch Jarník v roce 1930, avšak poprvé byla publikována upravená verze algoritmu Robertem C. Primem, který algoritmus objevil a upravil v roce 1957. Aby toho nebylo málo, tak byl tento algoritmus poté vylepšen v roce 1959 Edsgerem Dijkstrou, tudíž můžeme různé verze algoritmu najít pod jmény: "Jarníkův algoritmus", "Primův algoritmus", "DJP algoritmus".
@@ -130,9 +132,9 @@ Jedná se o standardní implementaci Borůvkova algoritmu, která byla vytvořen
 Algoritmus funguje tak, že rozdělí graf na několik spojených komponent a opakovaně přidává hranu s minimální váhou, která spojuje dvě různé komponenty. Tento proces pokračuje, dokud není graf úplně propojen, čímž vznikne minimální kostra.
 
 \subsubsection{Psuedo-kód}
-\begin{lstlisting}
-// Source: https://cs.wikipedia.org/wiki/Bor%C5%AFvk%C5%AFv_algoritmus#Implementace_v_pseudok%C3%B3du
+Zdroj uveden v poznámkách pod čarou\footnote{Borůvkův algoritmus. In: Wikipedia: the free encyclopedia [online]. San Francisco (CA): Wikimedia Foundation, 2001- [cit. 2023-04-12]. Dostupné z: \url{https://cs.wikipedia.org/wiki/Bor\%C5\%AFvk\%C5\%AFv_algoritmus\#Implementace_v_pseudok\%C3\%B3du}}
 
+\begin{lstlisting}
 algoritmus Borůvka:
     vstup: Graf G jehož hrany mají různé ohodnocení.
     výstup: Strom F je minimální kostra grafu G.
