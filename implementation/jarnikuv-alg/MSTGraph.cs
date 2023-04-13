@@ -15,20 +15,19 @@
         public List<Edge> JarnikMST()
         {
             List<Edge> minimumSpanningTree = new List<Edge>();
-            HashSet<int> visited = new HashSet<int> {
-                0
-            };
+            bool[] visited = new bool[number_of_nodes * 2];
+            visited[0] = true;
 
-            while (visited.Count < number_of_nodes)
-            {
+            int visited_count = 1;
+            while (visited_count < number_of_nodes) {
                 Edge? minEdge = null;
                 foreach (Edge edge in edges) {
-                    if (visited.Contains(edge.From) && !visited.Contains(edge.To)) {
+                    if (visited[edge.From] && !visited[edge.To]) {
                         if (minEdge == null || edge.Weight < minEdge.Weight) {
                             minEdge = edge;
                         }
                     }
-                    else if (visited.Contains(edge.To) && !visited.Contains(edge.From)) {
+                    else if (visited[edge.To] && !visited[edge.From]) {
                         if (minEdge == null || edge.Weight < minEdge.Weight) {
                             minEdge = edge;
                         }
@@ -36,12 +35,18 @@
                 }
 
                 if (minEdge == null) {
-                    throw new Exception("Fuck");
+                    throw new Exception("Tree is not connected.");
                 }
 
                 minimumSpanningTree.Add(minEdge);
-                visited.Add(minEdge.From);
-                visited.Add(minEdge.To);
+                if (!visited[minEdge.From]) {
+                    visited[minEdge.From] = true;
+                    visited_count++;
+                }
+                if (!visited[minEdge.To]) {
+                    visited[minEdge.To] = true;
+                    visited_count++;
+                }
             }
 
             return minimumSpanningTree;
