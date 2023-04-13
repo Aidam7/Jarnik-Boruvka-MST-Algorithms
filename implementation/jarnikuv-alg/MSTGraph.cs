@@ -29,14 +29,14 @@
                 if (destinations.Count == 0)
                 {
                     destinations.AddRange(queue.Where(x => x.To == i).ToList());
+                    if(destinations.Count == 0)
+                        break;
+                    i = destinations[0].From;
                 }
-
-                if (destinations.Count == 0)
+                else
                 {
-                    i = MST[MST.Count - 1].From;
-                    break;
+                    i = destinations[0].To;
                 }
-                i = destinations[0].To;
                 queue.Remove(destinations[0]);
                 MST.Add(destinations[0]);
             }
