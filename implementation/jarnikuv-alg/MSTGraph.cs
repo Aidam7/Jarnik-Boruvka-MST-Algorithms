@@ -15,7 +15,7 @@
         public List<Edge> JarnikMST()
         {
             List<Edge> minimumSpanningTree = new List<Edge>();
-            bool[] visited = new bool[number_of_nodes * 2];
+            bool[] visited = new bool[number_of_nodes];
             visited[0] = true;
 
             int visited_count = 1;
