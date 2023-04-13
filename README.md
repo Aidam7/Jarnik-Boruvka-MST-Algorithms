@@ -17,7 +17,7 @@ Vedoucí práce byl Mgr. Horálek Josef, Ph.D.
 Požadavky na seminární práci byly následující:
 * Popis principu využití daného grafu 
 
-* Popis fungování daného al goritmu 
+* Popis fungování daného algoritmu 
 
 * Historický kontext 
 
