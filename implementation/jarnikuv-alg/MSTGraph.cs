@@ -21,13 +21,24 @@
                 queue.Add(edge);
             }
             queue = queue.OrderBy(x => x.Weight).ToList();
-            
-            for (int i = 0; i < number_of_nodes; i++)
+            int i = 0;
+            while (queue.Count > 0)
             {
                 List<Edge> destinations = new List<Edge>();
                 destinations.AddRange(queue.Where(x => x.From == i).ToList());
-                if(destinations.Count != 0)
-                    MST.Add(destinations[0]);
+                if (destinations.Count == 0)
+                {
+                    destinations.AddRange(queue.Where(x => x.To == i).ToList());
+                }
+
+                if (destinations.Count == 0)
+                {
+                    i = MST[MST.Count - 1].From;
+                    break;
+                }
+                i = destinations[0].To;
+                queue.Remove(destinations[0]);
+                MST.Add(destinations[0]);
             }
             return MST;
         }
