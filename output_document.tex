@@ -9,7 +9,7 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage{url}
 
-\author{Cerman Vilém, Diblík Tomáš, Pečenka Adam \\ 3.A \\\\ DELTA - Střední škola informatiky a ekonomie, s.r.o.\\Vedoucí práce: Mgr. Horálek Josef, Ph.D.}
+\author{Cerman Vilém, Diblík Tomáš, Pečenka Adam \\ 3.A \\\\ DELTA - Střední škola informatiky a ekonomie, s.r.o.\\Vedoucí práce: Mgr. Horálek Josef, Ph.D.\\\\\\Pardubice}
 \title{Algoritmy profesorů Jarníka a Borůvky}
 \date{\selectlanguage{czech}\today}
 
@@ -36,7 +36,6 @@
     tabsize=2,
     inputencoding=utf8,
     extendedchars=true,
-    escapeinside=||,
     literate=
         {á}{{\'a}}1
         {č}{{\v{c}}}1
@@ -53,6 +52,7 @@
         {ů}{{\r{u}}}1
         {ý}{{\'y}}1
         {ž}{{\v{z}}}1
+        {|}{\textbar}1
 }
 \lstset{style=code_style}
 
@@ -87,15 +87,15 @@
 \subsection{Jarníkův algoritmus}
 
 \medbreak
-\textbf{Nejhorší možná časová komplexita}: TODO
+\textbf{Nejhorší možná časová komplexita}: $O((V + E)*log(V)) => E*log(V)$
 \medbreak\noindent
-\textbf{Průměrná časová komplexita}: TODO
+\textbf{Průměrná časová komplexita}: $O((V + E)*log(V)) => E*log(V)$
 \medbreak\noindent
-\textbf{Nejlepší možná časová komplexita}: TODO
+\textbf{Nejlepší možná časová komplexita}: $O((V + E)*log(V)) => E*log(V)$
 \medbreak\noindent
-\textbf{Prostorová komplexita}: TODO
+\textbf{Prostorová komplexita}: $O(n)$
 \medbreak\noindent
-\textbf{Stabilita}: TODO
+\textbf{Stabilita}: Nestabilní
 \medbreak
 
 \pagebreak
@@ -118,7 +118,7 @@ Jak již bylo zmíněno, Vojtěch Jarník vytvořil svůj algoritmus roku 1930. 
 
 
 \section{Využití}
-Jarníkův i Borůvkův algoritmus jsou staré algoritmy, které se již často nevyužívají, vzhledem k pokroku v oblasti grafové teorie. Oba algoritmy byly vytvářeny v 30. letech 19. století českými matematiky. Oba algoritmy řeší problém nalezení minimální kostry grafu. Jedná se o problém, kdy chceme v nedirektovaném vyváženém grafu najít nejmenší možnou kostru. To znamená že máme graf, ve kterém jsou náhodně propojené prvky. Každé propojení má nějakou hodnotu. Naším cílem je najít stromovou strukturu, díky které se dostaneme ke každému "nodu" grafu za pomoci využití co nejmenších hodnot na spojích. Jakmile máme takovouto stromovou strukturu,můžeme nad ní efektivně vyhledávat data, či ji jakkoliv procházet. Jako příklad bychom mohli využít routování v síti, kdy si router najde všechny zařízení na síti pomocí ARP protokolu, zjistí response time pro jednotlivé zařízení za pomocí pingu, sestaví nedirektovaný vyvážený graf, poté využije nějaký algoritmus na nalezení minimální kostry grafy a dle toho poté posílá packety. S největší pravděpodobností v dnešní době daný router nebude používat tento starý algoritmus, ale teoreticky bychom ho mohli najít na velice starých modelech. Algoritmus je určen pro úpravu dat do podoby, tedy minimální kostry, kterou pak můžeme použít pro zrychlení dalších algoritmů.
+Jarníkův i Borůvkův algoritmus jsou staré algoritmy, které se již často nevyužívají, vzhledem k pokroku v oblasti grafové teorie. Oba algoritmy byly vytvářeny v druhé polovině 20. let 20. století českými matematiky. Oba algoritmy řeší problém nalezení minimální kostry grafu. Jedná se o problém, kdy chceme v nedirektovaném vyváženém grafu najít nejmenší možnou kostru. To znamená že máme graf, ve kterém jsou náhodně propojené prvky. Každé propojení má nějakou hodnotu. Naším cílem je najít stromovou strukturu, díky které se dostaneme ke každému "nodu" grafu za pomoci využití co nejmenších hodnot na spojích. Jakmile máme takovouto stromovou strukturu,můžeme nad ní efektivně vyhledávat data, či ji jakkoliv procházet. Jako příklad bychom mohli využít routování v síti, kdy si router najde všechny zařízení na síti pomocí ARP protokolu, zjistí response time pro jednotlivé zařízení za pomocí pingu, sestaví nedirektovaný vyvážený graf, poté využije nějaký algoritmus na nalezení minimální kostry grafy a dle toho poté posílá packety. S největší pravděpodobností v dnešní době daný router nebude používat tento starý algoritmus, ale teoreticky bychom ho mohli najít na velice starých modelech. Algoritmus je určen pro úpravu dat do podoby, tedy minimální kostry, kterou pak můžeme použít pro zrychlení dalších algoritmů.
 
 \pagebreak
 
@@ -310,9 +310,80 @@ Algoritmus je tedy takzvaný greedy algoritmus.
 Implementace vznikla v jazyce C\# dle následujícího pseudo-kódu.
 
 \subsubsection{Psuedo-kód}
-TODO
+\begin{lstlisting}[language=csh]
+    Založ prázdný seznam MST.
+    Založ pole visited o délce počtu bodů.
+    Nastav první bod jako navštívený.
+    Zvyš počítadlo navštívených bodů na 1.
 
+    Dokud je počet navštívených bodů nižší než celkový počet bodů
+        Založ minEdge - nejlevnější cesta a nastav jí na null.
+            Také by se dala použít nejvyšší hodnota v grafu.
+        Pro každou cestu
+            Pokud je začátek cesty navštívený a konec cesty nenavštívený
+                Pokud je minEdge null NEBO cena vybrané cesty menší než cena minEdge
+                    Nastav minEdge na vybranou cestu.
+                Nebo pokud je navštívený konec cesty a začátek nenavštívený
+                    Nastav minEdge na vybranou cestu.
+            Pokud je minEdge null
+                Hoď vyjímku - graf není propojený.
+            Přidej minEdge do MST
+            Pokud není začátek cesty navštívený
+                Označ ho jako navštívený.
+                Zvyš počet navštívených bodů o 1.
+            Pokud není konec cesty navštívený
+                Označ ho jako navštívený.
+                Zvyš počet navštívených bodů o 1.
+    Vrať MST.
+\end{lstlisting}    
 \subsubsection{C\#}
-TODO
+Jarníkův algoritmus využívá stejné podpůrné třídy, tedy Edge a MSTGraph jako Borůvkův algoritmus. Byly tedy vynechány. Soubor program.cs je také stejný, samozřejmě kromě volání Borůvkova algoritmu, místo toho voláme Jarníkův algoritmus.
+\begin{lstlisting}[language=csh]
+    public List<Edge> JarnikMST()
+    {
+        List<Edge> minimumSpanningTree = new List<Edge>();
+        bool[] visited = new bool[number_of_nodes];
+        visited[0] = true;
+
+        int visited_count = 1;
+        while (visited_count < number_of_nodes) {
+            Edge? minEdge = null;
+            foreach (Edge edge in edges) {
+                if (visited[edge.From] && !visited[edge.To]) {
+                    if (minEdge == null || edge.Weight < minEdge.Weight) {
+                        minEdge = edge;
+                    }
+                }
+                else if (visited[edge.To] && !visited[edge.From]) {
+                    if (minEdge == null || edge.Weight < minEdge.Weight) {
+                        minEdge = edge;
+                    }
+                }
+            }
+
+            if (minEdge == null) {
+                throw new Exception("Tree is not connected.");
+            }
+
+            minimumSpanningTree.Add(minEdge);
+            if (!visited[minEdge.From]) {
+                visited[minEdge.From] = true;
+                visited_count++;
+            }
+            if (!visited[minEdge.To]) {
+                visited[minEdge.To] = true;
+                visited_count++;
+            }
+        }
+
+        return minimumSpanningTree;
+    }
+\end{lstlisting}
+
+\subsubsection{Class diagram}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\textwidth]{class_diagram_jarnik_alg.png}
+\end{figure}
 
 \end{document}
