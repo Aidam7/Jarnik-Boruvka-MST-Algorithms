@@ -14,44 +14,42 @@
 
         public List<Edge> JarnikMST()
         {
-            /*
-             * node[] jarnikAlgorithm(graph, weight)
-                Queue q //fronta
-                q.addAllVetices(graph.vertices) //pridej vsechny uzly do fronty
-    
-                distances = new int[q.size()] //pole vzdalenosti
-                distances[0] = 0 //koren
-                for i in 1 -> distances.length - 1 do                                 
-                    distances[i] = +inf //ostatni uzly jsou nekonecne daleko
-     
-                predecessors = new node[q.size()] //pole predchudcu
-                predecessors[0] = null //koren nema predchudce
-    
-                while !queue.empty() do //dokud neni fronta prazdna
-                    u = queue.extractMin() //vrat prvek v minimalni vzdalenosti
-                    for node in descendants(u) do //pro vsechny potomky u
-                        if queue.contains(node) AND weight(u, node) < d[node] //pokud se nektery z potomku priblizil k dosud postavene kostre
-                            then predecessors[node] = u //u je tedy jeho predek
-                                 d[node] = weight(u, node) //nastav nvou vzdalenost    
-    
-                return predecessors //vrat pole predchudcu
-             */
+            List<Edge> minimumSpanningTree = new List<Edge>();
+            bool[] visited = new bool[number_of_nodes];
+            visited[0] = true;
 
+            int visited_count = 1;
+            while (visited_count < number_of_nodes) {
+                Edge? minEdge = null;
+                foreach (Edge edge in edges) {
+                    if (visited[edge.From] && !visited[edge.To]) {
+                        if (minEdge == null || edge.Weight < minEdge.Weight) {
+                            minEdge = edge;
+                        }
+                    }
+                    else if (visited[edge.To] && !visited[edge.From]) {
+                        if (minEdge == null || edge.Weight < minEdge.Weight) {
+                            minEdge = edge;
+                        }
+                    }
+                }
 
+                if (minEdge == null) {
+                    throw new Exception("Tree is not connected.");
+                }
 
-            List<Edge> MST = new List<Edge>();
-
-            // Create a parent array to keep track of components
-            int[] parent = new int[number_of_nodes];
-            for (int i = 0; i < number_of_nodes; i++)
-            {
-                parent[i] = i;
+                minimumSpanningTree.Add(minEdge);
+                if (!visited[minEdge.From]) {
+                    visited[minEdge.From] = true;
+                    visited_count++;
+                }
+                if (!visited[minEdge.To]) {
+                    visited[minEdge.To] = true;
+                    visited_count++;
+                }
             }
 
-            return MST;
+            return minimumSpanningTree;
         }
-
-        // Find the parent of a node in the parent array
-        private int find_parent_node(int[] parent, int i) => parent[i] == i ? i : (parent[i] = find_parent_node(parent, parent[i]));
     }
 }
