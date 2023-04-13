@@ -36,7 +36,6 @@
     tabsize=2,
     inputencoding=utf8,
     extendedchars=true,
-    escapeinside=||,
     literate=
         {á}{{\'a}}1
         {č}{{\v{c}}}1
@@ -53,6 +52,7 @@
         {ů}{{\r{u}}}1
         {ý}{{\'y}}1
         {ž}{{\v{z}}}1
+        {|}{\textbar}1
 }
 \lstset{style=code_style}
 
@@ -87,15 +87,15 @@
 \subsection{Jarníkův algoritmus}
 
 \medbreak
-\textbf{Nejhorší možná časová komplexita}: TODO
+\textbf{Nejhorší možná časová komplexita}: $O((V + E)*log(V)) => E*log(V)$
 \medbreak\noindent
-\textbf{Průměrná časová komplexita}: TODO
+\textbf{Průměrná časová komplexita}: $O((V + E)*log(V)) => E*log(V)$
 \medbreak\noindent
-\textbf{Nejlepší možná časová komplexita}: TODO
+\textbf{Nejlepší možná časová komplexita}: $O((V + E)*log(V)) => E*log(V)$
 \medbreak\noindent
-\textbf{Prostorová komplexita}: TODO
+\textbf{Prostorová komplexita}: $O(n)$
 \medbreak\noindent
-\textbf{Stabilita}: TODO
+\textbf{Stabilita}: Nestabilní
 \medbreak
 
 \pagebreak
