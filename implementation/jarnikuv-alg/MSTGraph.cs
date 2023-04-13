@@ -39,6 +39,12 @@
                 }
                 //queue.Remove(destinations[0]);
                 queue = queue.Except(destinations).ToList();
+                bool wouldLoop = false;
+                foreach (var edge in MST)
+                    if (destinations[0].To == edge.From)
+                        wouldLoop = true;
+                if (wouldLoop)
+                    break;
                 MST.Add(destinations[0]);
             }
             return MST;
