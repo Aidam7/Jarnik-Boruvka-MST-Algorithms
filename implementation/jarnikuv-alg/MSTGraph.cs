@@ -37,7 +37,8 @@
                 {
                     i = destinations[0].To;
                 }
-                queue.Remove(destinations[0]);
+                //queue.Remove(destinations[0]);
+                queue = queue.Except(destinations).ToList();
                 MST.Add(destinations[0]);
             }
             return MST;
