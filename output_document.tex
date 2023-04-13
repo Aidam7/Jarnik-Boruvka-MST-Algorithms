@@ -9,7 +9,7 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage{url}
 
-\author{Cerman Vilém, Diblík Tomáš, Pečenka Adam \\ 3.A \\\\ DELTA - Střední škola informatiky a ekonomie, s.r.o.\\Vedoucí práce: Mgr. Horálek Josef, Ph.D.}
+\author{Cerman Vilém, Diblík Tomáš, Pečenka Adam \\ 3.A \\\\ DELTA - Střední škola informatiky a ekonomie, s.r.o.\\Vedoucí práce: Mgr. Horálek Josef, Ph.D.\\\\\\Pardubice}
 \title{Algoritmy profesorů Jarníka a Borůvky}
 \date{\selectlanguage{czech}\today}
 
@@ -310,10 +310,75 @@ Algoritmus je tedy takzvaný greedy algoritmus.
 Implementace vznikla v jazyce C\# dle následujícího pseudo-kódu.
 
 \subsubsection{Psuedo-kód}
-TODO
+\begin{lstlisting}[language=csh]
+    Založ prázdný seznam MST.
+    Založ pole visited o délce počtu bodů.
+    Nastav první bod jako navštívený.
+    Zvyš počítadlo navštívených bodů na 1.
 
+    Dokud je počet navštívených bodů nižší než celkový počet bodů
+        Založ minEdge - nejlevnější cesta a nastav jí na null.
+            Také by se dala použít nejvyšší hodnota v grafu.
+        Pro každou cestu
+            Pokud je začátek cesty navštívený a konec cesty nenavštívený
+                Pokud je minEdge null NEBO cena vybrané cesty menší než cena minEdge
+                    Nastav minEdge na vybranou cestu.
+                Nebo pokud je navštívený konec cesty a začátek nenavštívený
+                    Nastav minEdge na vybranou cestu.
+            Pokud je minEdge null
+                Hoď vyjímku - graf není propojený.
+            Přidej minEdge do MST
+            Pokud není začátek cesty navštívený
+                Označ ho jako navštívený.
+                Zvyš počet navštívených bodů o 1.
+            Pokud není konec cesty navštívený
+                Označ ho jako navštívený.
+                Zvyš počet navštívených bodů o 1.
+    Vrať MST.
+\end{lstlisting}    
 \subsubsection{C\#}
-TODO
+Jarníkův algoritmus využívá stejné podpůrné třídy, tedy Edge a MSTGraph jako Borůvkův algoritmus. Byly tedy vynechány. Soubor program.cs je také stejný, samozřejmě kromě volání Borůvkova algoritmu, místo toho voláme Jarníkův algoritmus.
+\begin{lstlisting}[language=csh]
+    public List<Edge> JarnikMST()
+    {
+        List<Edge> minimumSpanningTree = new List<Edge>();
+        bool[] visited = new bool[number_of_nodes];
+        visited[0] = true;
+
+        int visited_count = 1;
+        while (visited_count < number_of_nodes) {
+            Edge? minEdge = null;
+            foreach (Edge edge in edges) {
+                if (visited[edge.From] && !visited[edge.To]) {
+                    if (minEdge == null || edge.Weight < minEdge.Weight) {
+                        minEdge = edge;
+                    }
+                }
+                else if (visited[edge.To] && !visited[edge.From]) {
+                    if (minEdge == null || edge.Weight < minEdge.Weight) {
+                        minEdge = edge;
+                    }
+                }
+            }
+
+            if (minEdge == null) {
+                throw new Exception("Tree is not connected.");
+            }
+
+            minimumSpanningTree.Add(minEdge);
+            if (!visited[minEdge.From]) {
+                visited[minEdge.From] = true;
+                visited_count++;
+            }
+            if (!visited[minEdge.To]) {
+                visited[minEdge.To] = true;
+                visited_count++;
+            }
+        }
+
+        return minimumSpanningTree;
+    }
+\end{lstlisting}
 
 \subsubsection{Class diagram}
 \begin{figure}[h]
