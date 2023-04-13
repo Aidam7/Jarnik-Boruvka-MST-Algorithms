@@ -14,43 +14,37 @@
 
         public List<Edge> JarnikMST()
         {
-            List<Edge> MST = new List<Edge>();
-            var queue = new List<Edge>();
-            foreach (var edge in edges)
-            {
-                queue.Add(edge);
-            }
-            queue = queue.OrderBy(x => x.Weight).ToList();
-            int i = 0;
-            while (queue.Count > 0)
-            {
-                List<Edge> destinations = new List<Edge>();
-                destinations.AddRange(queue.Where(x => x.From == i).ToList());
-                if (destinations.Count == 0)
-                {
-                    destinations.AddRange(queue.Where(x => x.To == i).ToList());
-                    if(destinations.Count == 0)
-                        break;
-                    i = destinations[0].From;
-                }
-                else
-                {
-                    i = destinations[0].To;
-                }
-                //queue.Remove(destinations[0]);
-                queue = queue.Except(destinations).ToList();
-                bool wouldLoop = false;
-                foreach (var edge in MST)
-                    if (destinations[0].To == edge.From)
-                        wouldLoop = true;
-                if (wouldLoop)
-                    break;
-                MST.Add(destinations[0]);
-            }
-            return MST;
-        }
+            List<Edge> minimumSpanningTree = new List<Edge>();
+            HashSet<int> visited = new HashSet<int> {
+                0
+            };
 
-        // Find the parent of a node in the parent array
-        private int find_parent_node(int[] parent, int i) => parent[i] == i ? i : (parent[i] = find_parent_node(parent, parent[i]));
+            while (visited.Count < number_of_nodes)
+            {
+                Edge? minEdge = null;
+                foreach (Edge edge in edges) {
+                    if (visited.Contains(edge.From) && !visited.Contains(edge.To)) {
+                        if (minEdge == null || edge.Weight < minEdge.Weight) {
+                            minEdge = edge;
+                        }
+                    }
+                    else if (visited.Contains(edge.To) && !visited.Contains(edge.From)) {
+                        if (minEdge == null || edge.Weight < minEdge.Weight) {
+                            minEdge = edge;
+                        }
+                    }
+                }
+
+                if (minEdge == null) {
+                    throw new Exception("Fuck");
+                }
+
+                minimumSpanningTree.Add(minEdge);
+                visited.Add(minEdge.From);
+                visited.Add(minEdge.To);
+            }
+
+            return minimumSpanningTree;
+        }
     }
 }
