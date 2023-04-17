@@ -32,6 +32,7 @@
             List<Edge> MinimumSpanningTree = graph.BoruvkaMST();
 
             Console.WriteLine("Minimum spanning tree:");
+            MinimumSpanningTree = MinimumSpanningTree.OrderBy(x => x.From).ToList();
             foreach (Edge edge in MinimumSpanningTree)
             {
                 Console.WriteLine($"{edge.From} - {edge.To} ({edge.Weight})");
