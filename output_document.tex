@@ -340,44 +340,49 @@ Implementace vznikla v jazyce C\# dle následujícího pseudo-kódu.
 Jarníkův algoritmus využívá stejné podpůrné třídy, tedy Edge a MSTGraph jako Borůvkův algoritmus. Byly tedy vynechány. Soubor program.cs je také stejný, samozřejmě kromě volání Borůvkova algoritmu, místo toho voláme Jarníkův algoritmus.
 \begin{lstlisting}[language=csh]
     public List<Edge> JarnikMST()
-    {
-        List<Edge> minimumSpanningTree = new List<Edge>();
-        bool[] visited = new bool[number_of_nodes];
-        visited[0] = true;
-
-        int visited_count = 1;
-        while (visited_count < number_of_nodes) {
-            Edge? minEdge = null;
-            foreach (Edge edge in edges) {
-                if (visited[edge.From] && !visited[edge.To]) {
-                    if (minEdge == null || edge.Weight < minEdge.Weight) {
-                        minEdge = edge;
+        {
+            List<Edge> minimumSpanningTree = new List<Edge>();
+            //Create an array to keep track of visited nodes
+            bool[] visited = new bool[number_of_nodes];
+            //Set the first node as visited
+            visited[0] = true;
+            int visited_count = 1;
+            //Go through all nodes
+            while (visited_count < number_of_nodes) {
+                //Keep track of the edge with the lowest cost
+                Edge? minEdge = null;
+                //Find the cheapest edge
+                foreach (Edge edge in edges) {
+                    if (visited[edge.From] && !visited[edge.To]) {
+                        if (minEdge == null || edge.Weight < minEdge.Weight) {
+                            minEdge = edge;
+                        }
+                    }
+                    else if (visited[edge.To] && !visited[edge.From]) {
+                        if (minEdge == null || edge.Weight < minEdge.Weight) {
+                            minEdge = edge;
+                        }
                     }
                 }
-                else if (visited[edge.To] && !visited[edge.From]) {
-                    if (minEdge == null || edge.Weight < minEdge.Weight) {
-                        minEdge = edge;
-                    }
+                //If a cheapest edge is not found the graph isn't connected
+                if (minEdge == null) {
+                    throw new Exception("Tree is not connected.");
+                }
+                //Add the cheapest edge to the MST
+                minimumSpanningTree.Add(minEdge);
+                //Set both origin and destination nodes as visited
+                if (!visited[minEdge.From]) {
+                    visited[minEdge.From] = true;
+                    visited_count++;
+                }
+                if (!visited[minEdge.To]) {
+                    visited[minEdge.To] = true;
+                    visited_count++;
                 }
             }
 
-            if (minEdge == null) {
-                throw new Exception("Tree is not connected.");
-            }
-
-            minimumSpanningTree.Add(minEdge);
-            if (!visited[minEdge.From]) {
-                visited[minEdge.From] = true;
-                visited_count++;
-            }
-            if (!visited[minEdge.To]) {
-                visited[minEdge.To] = true;
-                visited_count++;
-            }
+            return minimumSpanningTree;
         }
-
-        return minimumSpanningTree;
-    }
 \end{lstlisting}
 
 \subsubsection{Class diagram}
