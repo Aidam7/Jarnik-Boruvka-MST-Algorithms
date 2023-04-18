@@ -151,7 +151,7 @@ algoritmus Borůvka:
         pro každou komponentu:
             Přidej její nejlevnější hranu do F
 \end{lstlisting}
-
+\pagebreak
 \subsubsection{C\#}
 
 \medbreak\noindent
@@ -253,7 +253,7 @@ public class MSTGraph
     private int find_parent_node(int[] parent, int i) => parent[i] == i ? i : (parent[i] = find_parent_node(parent, parent[i]));
 }
 \end{lstlisting}
-
+\pagebreak
 \medbreak\noindent
 Příklad využití:
 \begin{lstlisting}[language=csh]
@@ -296,7 +296,7 @@ internal class Program
     }
 }
 \end{lstlisting}
-
+\pagebreak
 \subsubsection{Class diagram}
 \begin{figure}[h]
 	\centering
@@ -335,7 +335,8 @@ Implementace vznikla v jazyce C\# dle následujícího pseudo-kódu.
                 Označ ho jako navštívený.
                 Zvyš počet navštívených bodů o 1.
     Vrať MST.
-\end{lstlisting}    
+\end{lstlisting}
+\pagebreak
 \subsubsection{C\#}
 Jarníkův algoritmus využívá stejné podpůrné třídy, tedy Edge a MSTGraph jako Borůvkův algoritmus. Byly tedy vynechány. Soubor program.cs je také stejný, samozřejmě kromě volání Borůvkova algoritmu, místo toho voláme Jarníkův algoritmus.
 \begin{lstlisting}[language=csh]
@@ -384,7 +385,7 @@ Jarníkův algoritmus využívá stejné podpůrné třídy, tedy Edge a MSTGrap
             return minimumSpanningTree;
         }
 \end{lstlisting}
-
+\pagebreak
 \subsubsection{Class diagram}
 \begin{figure}[h]
 	\centering
