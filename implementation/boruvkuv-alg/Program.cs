@@ -15,7 +15,7 @@
             */
             MSTGraph graph = new MSTGraph(7);
 
-            graph.AddEdge(0, 1, 4);
+            graph.AddEdge(0, 1, -4);
             graph.AddEdge(0, 2, 3);
 
             graph.AddEdge(1, 2, 5);
